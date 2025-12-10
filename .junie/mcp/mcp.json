@@ -1,0 +1,11 @@
+{
+    "mcpServers": {
+        "laravel-boost": {
+            "command": "C:\\laragon6\\bin\\php\\php-8.2.6-Win32-vs16-x64\\php.exe",
+            "args": [
+                "C:\\laragon6\\www\\new_project\\iraq\\delta-source-code-laravel-12-modules\\artisan",
+                "boost:mcp"
+            ]
+        }
+    }
+}
