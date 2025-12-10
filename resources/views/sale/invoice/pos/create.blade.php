@@ -379,4 +379,36 @@
 <script src="{{ versionedAsset('custom/js/common/common.js') }}"></script>
 <script src="{{ versionedAsset('custom/js/modals/party/party.js') }}"></script>
 <script src="{{ versionedAsset('custom/js/modals/item/item.js') }}"></script>
+
+<script>
+    $(document).ready(function() {
+        var select = $('#party_id');
+        
+        // Fetch the first page of customers (simulate empty search)
+        $.ajax({
+            url: baseURL + '/party/ajax/get-list',
+            method: 'GET',
+            data: {
+                term: '',  // Empty search to get all
+                party_type: 'customer',
+                page: 1
+            },
+            success: function(data) {
+                if (data.results && data.results.length > 0) {
+                    var firstCustomer = data.results[0];  // Get the first customer
+                    
+                    // Set as selected in Select2
+                    var newOption = new Option(firstCustomer.text, firstCustomer.id, true, true);
+                    select.append(newOption).trigger('change');
+                    
+                    // Optional: Trigger any custom events (e.g., from pos.js)
+                    select.trigger('change');
+                }
+            },
+            error: function() {
+                console.error('Error fetching customers');
+            }
+        });
+    });
+</script>
 @endsection
