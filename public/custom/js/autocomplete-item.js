@@ -86,6 +86,7 @@ function initItemAutocomplete(inputSelector, options = {}) {
             if (typeof options.onSelect === 'function') {
                 options.onSelect(ui.item);
             }
+            $(this).val('');
             return false;
         },
 
