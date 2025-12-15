@@ -314,4 +314,19 @@
     var _conversionRate = {{$formatNumber->formatWithPrecision($item->conversion_rate, comma:false)}};
     var _trackingType = '{{$item->tracking_type}}';
 </script>
+
+<script>
+    $(document).ready(function() {
+        // Check if URL has hash for stock tab
+        if (window.location.hash === '#successprofile') {
+            // Remove active class from all tabs
+            $('.nav-link').removeClass('active');
+            $('.tab-pane').removeClass('show active');
+            
+            // Activate stock tab
+            $('#successprofile-link').addClass('active');
+            $('#successprofile').addClass('show active');
+        }
+    });
+</script>
 @endsection

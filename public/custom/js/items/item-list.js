@@ -144,8 +144,49 @@ $(function () {
                 // { data: 'username', name: 'username', orderable: false, },
                 // { data: 'created_at', name: 'created_at' },
 
-                { data: 'action', name: 'action', orderable: false, searchable: false },
-            ],
+
+      {
+        data: "action",
+        name: "action",
+        orderable: false,
+        searchable: false,
+        render: (data, type, full, meta) => {
+          const itemId = full.id
+          const editUrl = baseURL + "/item/edit/" + itemId
+          const transactionUrl = baseURL + "/item/transaction/" + itemId
+
+          return `
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="${editUrl}">
+                                        <i class="bx bx-edit-alt me-2"></i>Edit
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item stock-edit-btn" href="${editUrl}#successprofile" data-id="${itemId}">
+                                        <i class="bx bx-package me-2"></i>Stock Edit
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="${transactionUrl}">
+                                        <i class="bx bx-transfer me-2"></i>Transactions
+                                    </a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item text-danger deleteRequest" href="javascript:void(0)" data-delete-id="${itemId}">
+                                        <i class="bx bx-trash me-2"></i>Delete
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    `
+        },
+      },            ],
 
             dom: "<'row' " +
                 "<'col-sm-12' " +
