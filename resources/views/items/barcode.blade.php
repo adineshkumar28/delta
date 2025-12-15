@@ -32,15 +32,14 @@
                                                     <option value="code39">CODE39</option>
                                                 </select>
                                             </div>
-                                            <div class="col-md-6 mb-3">
+                                      <div class="col-md-6 mb-3">
     <x-label for="size" name="{{ __('item.size') }}" />
     <select class="form-select" id="size" name="size">
         <option value="1_100x50">1 Label – 100 × 50 mm (Full Width)</option>
-        <option value="2_50x25" selected>2 Labels – 50 × 25 mm (Recommended for TVS LP46)</option>
-        <option value="2_50x30">2 Labels – 50 × 30 mm (Little Bigger)</option>
+        <option value="2_50x25">2 Labels – 50 × 25 mm </option>
+        <option value="2_50x30" selected>2 Labels – 50 × 30 mm (Recommended for TVS LP46)</option>
     </select>
-</div>
-                                            <div class="col-md-9">
+</div>                                 <div class="col-md-9">
                                                 <x-label for="search_item" name="{{ __('item.item_name') }}" />
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1"><i class="fadeIn animated bx bx-barcode-reader text-primary"></i></span>
