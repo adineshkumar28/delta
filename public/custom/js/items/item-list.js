@@ -5,6 +5,7 @@ $(function () {
 
     const datatableForm = $("#datatableForm");
 
+    var table;  // 👈 Declare table variable globally in the scope
     /**
      *Server Side Datatable Records
     */
@@ -22,6 +23,7 @@ $(function () {
             
     pageLength: 100,                 // 👈 DEFAULT 100 ROWS
     lengthMenu: [10, 25, 50, 100, 200, 500], // 👈 Dropdown options
+    stateSave: true,  // 👈 Add this: Saves page, length, etc. in localStorage
             ajax: {
                 url: baseURL + '/item/datatable-list',
                 data: {
