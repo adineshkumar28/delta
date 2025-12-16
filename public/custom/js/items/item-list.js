@@ -427,7 +427,6 @@ $(function () {
 // Save on Enter or focusout
 $(document).on("keypress blur", ".editable-cell", function(e) {
     let id = $(this).data("id");
-    let field = $(this).data("field");
     let value = $(this).text().trim();
 
     // ENTER key save

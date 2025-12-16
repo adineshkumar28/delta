@@ -452,7 +452,7 @@ public function updateInline(Request $request)
     $field = $request->field;
 
     // Numeric fields
-    if (in_array($field, ['sale_price', 'purchase_price', 'mrp', 'current_stock'])) {
+    if (in_array($field, ['sale_price', 'purchase_price', 'mrp'])) {
         $request->validate([
             'value' => 'numeric|min:0'
         ]);
