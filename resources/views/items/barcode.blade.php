@@ -55,19 +55,22 @@
                                                             <th scope="col">{{ __('item.barcode') }}</th>
                                                             <th scope="col">{{ __('item.sale_price') }}</th>
                                                             <th scope="col">{{ __('item.mrp') }}</th>
+                                                            <!-- Added PKD Date and EXP Date columns -->
+                                                            <th scope="col">PKD Date</th>
+                                                            <th scope="col">EXP Date</th>
                                                             <th scope="col">{{ __('app.qty') }}</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <tr>
-                                                            <td colspan="6" class="text-center fw-light fst-italic default-row">
+                                                            <td colspan="8" class="text-center fw-light fst-italic default-row">
                                                                 No items are added yet!!
                                                             </td>
                                                         </tr>
                                                     </tbody>
                                                     <tfoot>
                                                         <tr>
-                                                            <td colspan="5" class="fw-bold text-end tfoot-first-td">
+                                                            <td colspan="7" class="fw-bold text-end tfoot-first-td">
                                                                 {{ __('app.total') }}
                                                             </td>
                                                             <td class="fw-bold sum_of_quantity">

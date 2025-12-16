@@ -50,6 +50,9 @@
 .item-name   { font: normal 8pt Arial; margin: 0 0 1mm; }
 .price       { font: bold 9pt Arial; margin: 1mm 0; }
 .barcode-number { font: bold 7pt Arial; margin-top: 1mm; }
+/* Added styles for PKD and EXP dates */
+.dates-container { font: normal 6pt Arial; margin-top: 1mm; display: flex; justify-content: space-between; }
+.date-field { font: bold 6pt Arial; }
 
 canvas { max-width: 100%; }
 </style>
@@ -88,6 +91,10 @@ function renderLabels() {
                 <div class="price">₹${item.price}</div>
                 <canvas id="bc-${itemIndex}-${i}"></canvas>
                 <div class="barcode-number">${item.barcode}</div>
+                <div class="dates-container">
+                    <span class="date-field">PKD: ${item.pkdDate || 'N/A'}</span>
+                    <span class="date-field">EXP: ${item.expDate || 'N/A'}</span>
+                </div>
             `;
 
             currentRow.appendChild(label);
