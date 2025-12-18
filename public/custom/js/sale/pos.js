@@ -112,33 +112,50 @@
         pageRedirect(formObject);
     }
 
-    function pageRedirect(formObject){
-        var invoiceId = formObject.response.id;
+function pageRedirect(formObject){
+    var invoiceId = formObject.response.id;
 
+    if(callType === 'submit_form_with_print'){
+        // Silent direct print — no tab, no duplicate
+        silentPrintInvoice(invoiceId);
 
-        // if(invoiceId !== undefined){
-        //    var redirectTo = '/sale/invoice/details/'+invoiceId;
-        // }else{
-        //    var redirectTo = '/sale/invoice/list';
-        // }
-        // setTimeout(function() {
-        //    location.href = baseURL + redirectTo;
-        // }, 1000);
-
-        /**
-         * Show Print Page
-         * */
-        if(callType === 'submit_form_with_print'){
-            if(window.open(`${baseURL}/pos/print/${invoiceId}`, "_blank", "scrollbars=1,resizable=1,height=300,width=450")){
-                window.location=baseURL+"/pos";
-            }
-        }else{
-            window.location=baseURL+"/pos";
-        }
-
-        //Reload Page
-        //window.location=baseURL+"/pos";
+        // Print ஆனதும் POS page reload ஆகும்
+        setTimeout(function() {
+            window.location.href = baseURL + "/pos";
+        }, 3000); // 3 seconds delay — user print/cancel பண்ண time
+    } else {
+        window.location.href = baseURL + "/pos";
     }
+}
+
+let isPrinting = false;
+
+function silentPrintInvoice(invoiceId) {
+    if (isPrinting) return; // ⛔ block second call
+    isPrinting = true;
+
+    var iframe = document.createElement('iframe');
+    iframe.style.position = 'fixed';
+    iframe.style.right = '0';
+    iframe.style.bottom = '0';
+    iframe.style.width = '0';
+    iframe.style.height = '0';
+    iframe.style.border = 'none';
+    iframe.src = baseURL + "/pos/print/" + invoiceId;
+
+    document.body.appendChild(iframe);
+
+    iframe.onload = function () {
+        setTimeout(function () {
+            try {
+                iframe.contentWindow.focus();
+                iframe.contentWindow.print();
+            } catch (e) {
+                console.error(e);
+            }
+        }, 500);
+    };
+}
 
     function ajaxRequest(formArray){
         var formData = new FormData(document.getElementById(formArray.formId));
@@ -1174,9 +1191,31 @@ function smartAddItem(itemData) {
         }
     });
 
+      if (
+        itemData.current_stock !== undefined &&
+        parseFloat(itemData.current_stock) <= 0
+    ) {
+        iziToast.error({
+            title: 'Out of Stock',
+            layout: 2,
+            message: `${itemData.name} – Stock not available `
+        });
+        return false;
+    }
+
     if (existingRowId !== null) {
         const qtyInput = $(`input[name="quantity[${existingRowId}]"]`);
         let currentQty = parseFloat(qtyInput.val()) || 0;
+
+           /* ❌ STOCK LIMIT CHECK */
+    if (itemData.current_stock <= currentQty) {
+        iziToast.warning({
+            title: 'Stock Limit',
+            layout: 2,
+            message: `Available stock: ${itemData.current_stock}`
+        });
+        return false;
+    }
         qtyInput.val(currentQty + 1).trigger('change');
 
         const row = $(`#${existingRowId}`);

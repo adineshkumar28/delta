@@ -356,7 +356,7 @@
     <script src="{{ versionedAsset('assets/js/jquery.min.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            window.print();
+iframe.contentWindow.print();
         });
     </script>
 </body>
