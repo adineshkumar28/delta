@@ -164,11 +164,24 @@
                                                         </td>
                                                       </tr>
                                                       <tr>
+                                                 <td class="fw-bold" for="overall_discount">Overall Discount</td>
+                                                 <td>
+                                                    <div class="input-group">
+                                                        <input type="number" name="overall_discount" id="overall_discount" class="form-control" value="0" min="0" step="0.01">
+                                                        <select name="overall_discount_type" class="form-select">
+                                                            <option value="fixed">Fixed</option>
+                                                            <option value="percentage">%</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                              </tr>
+                                                      <tr>
                                                          <td><span class="fw-bold">{{ __('app.grand_total') }}</span></td>
                                                          <td>
                                                             <x-input type="text" additionalClasses="text-end grand_total" readonly=true name="grand_total" :required="true" placeholder="Round-Off" value="0"/>
                                                         </td>
                                                       </tr>
+
                                                       @if(app('company')['is_enable_secondary_currency'])
                                                         <tr>
                                                              <td><span class="fw-bold exchange-lang" data-exchange-lang="{{ __('currency.converted_to') }}">{{ __('currency.converted_to') }}</span></td>

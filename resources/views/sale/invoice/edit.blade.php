@@ -184,6 +184,19 @@
                                                             <x-input type="text" additionalClasses="text-end cu_numeric round_off " name="round_off" :required="false" placeholder="Round-Off" value="0"/>
                                                         </td>
                                                       </tr>
+
+                                                      <tr>
+                                                 <td class="fw-bold" for="overall_discount">Overall Discount</td>
+                                                 <td>
+                                                    <div class="input-group">
+                                                        <input type="number" name="overall_discount" id="overall_discount" class="form-control" value="0" min="0" step="0.01">
+                                                        <select name="overall_discount_type" class="form-select">
+                                                            <option value="fixed">Fixed</option>
+                                                            <option value="percentage">%</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                              </tr>
                                                       <tr>
                                                          <td><span class="fw-bold">{{ __('app.grand_total') }}</span></td>
                                                          <td>
